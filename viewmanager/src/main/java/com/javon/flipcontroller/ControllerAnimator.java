@@ -14,6 +14,9 @@ public abstract class ControllerAnimator extends Animation implements Animation.
 
     private static final int DEFAULT_DURATION = 1000;
 
+    private View.OnClickListener oldViewListener;
+    private View.OnClickListener newViewListener;
+
     /**
      * Default Constructor
      */
@@ -54,5 +57,17 @@ public abstract class ControllerAnimator extends Animation implements Animation.
         this.mNewView = newView;
         if(mOldView != null)
             this.mNewView.setLayoutParams(mOldView.getLayoutParams());
+    }
+
+    @Override
+    public void onAnimationStart(Animation animation) {
+        View oldView = getOldView();
+        View newView = getNewView();
+
+        if(oldView == null || newView ==null)
+        {
+            throw new NullPointerException("No view allowed to be null when animation started");
+        }
+
     }
 }

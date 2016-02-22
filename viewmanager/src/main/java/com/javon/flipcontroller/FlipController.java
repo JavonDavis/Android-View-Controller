@@ -17,6 +17,7 @@ public class FlipController {
     private ArrayList<View> mViews;
     private ListIterator<View> iterator;
     private boolean mLoop;
+    private ViewListener listener;
 
     public FlipController(ArrayList<View> views)
     {
@@ -47,8 +48,10 @@ public class FlipController {
         this.mViews = views;
         this.iterator = views.listIterator();
 
+        listener = new ViewListener();
+
         if(useDefaultListeners)
-            setupListeners();
+            views.get(0).setOnClickListener(listener);
 
         this.mLoop = loop;
 
@@ -70,9 +73,11 @@ public class FlipController {
     {
         if(iterator.hasNext()) {
             View currentView = iterator.next();
+            currentView.setOnClickListener(null);
 
             if (iterator.nextIndex() < mViews.size()) {
                 View nextView = mViews.get(iterator.nextIndex());
+                nextView.setOnClickListener(listener);
 
                 ControllerAnimator animator = getDefaultForwardAnimation();
 
@@ -88,6 +93,7 @@ public class FlipController {
                 {
                     iterator = mViews.listIterator();
                     View nextView = mViews.get(0);
+                    nextView.setOnClickListener(listener);
 
                     ControllerAnimator animator = getDefaultForwardAnimation();
 
@@ -166,12 +172,17 @@ public class FlipController {
     private void setupListeners() {
         for(View view:mViews)
         {
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    next();
-                }
-            });
+            view.setOnClickListener(listener);
+        }
+    }
+
+    /**
+     * remove onClicklistener on all the views
+     */
+    private void removeListeners() {
+        for(View view:mViews)
+        {
+            view.setOnClickListener(null);
         }
     }
 
@@ -227,5 +238,22 @@ public class FlipController {
 
     public void setIterator(ListIterator<View> iterator) {
         this.iterator = iterator;
+    }
+
+    public boolean hasNext()
+    {
+        return iterator.hasNext();
+    }
+
+    public boolean hasPrevious()
+    {
+        return iterator.hasPrevious();
+    }
+
+    private class ViewListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            next();
+        }
     }
 }
