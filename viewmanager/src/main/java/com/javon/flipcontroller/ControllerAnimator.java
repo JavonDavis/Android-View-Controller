@@ -14,6 +14,15 @@ public abstract class ControllerAnimator extends Animation implements Animation.
 
     private static final int DEFAULT_DURATION = 1000;
 
+    /**
+     * Default Constructor
+     */
+    public ControllerAnimator()
+    {
+        setDuration(DEFAULT_DURATION);
+        setAnimationListener(this);
+    }
+
     public ControllerAnimator(View oldView, View newView)
     {
         this.mOldView = oldView;
@@ -33,6 +42,8 @@ public abstract class ControllerAnimator extends Animation implements Animation.
 
     public void setOldView(View oldView) {
         this.mOldView = oldView;
+        if(mNewView != null)
+            this.mNewView.setLayoutParams(mOldView.getLayoutParams());
     }
 
     public View getNewView() {
@@ -41,5 +52,7 @@ public abstract class ControllerAnimator extends Animation implements Animation.
 
     public void setNewView(View newView) {
         this.mNewView = newView;
+        if(mOldView != null)
+            this.mNewView.setLayoutParams(mOldView.getLayoutParams());
     }
 }

@@ -12,9 +12,21 @@ import android.view.animation.Animation;
  */
 public class LeftFlipAnimation extends ControllerAnimator {
 
+    /**
+     *
+     * @param oldView - the view to transition from
+     * @param newView - the view to transition to
+     */
     public LeftFlipAnimation(View oldView, View newView)
     {
         super(oldView,newView);
+    }
+
+    /**
+     * Default Constructor
+     */
+    public LeftFlipAnimation() {
+        super();
     }
 
 

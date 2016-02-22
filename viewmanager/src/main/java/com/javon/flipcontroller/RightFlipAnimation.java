@@ -11,6 +11,14 @@ import android.view.animation.Animation;
  */
 public class RightFlipAnimation extends ControllerAnimator {
 
+    /**
+     * Default Constuctor
+     */
+    public RightFlipAnimation()
+    {
+        super();
+    }
+
     public RightFlipAnimation(View oldView, View newView)
     {
         super(oldView,newView);

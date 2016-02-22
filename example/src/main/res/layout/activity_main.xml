@@ -9,26 +9,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.javon.flipsample.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/blue"
+        android:scaleType="centerCrop"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/hello" />
+        android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Goodbye World!"
-        android:id="@+id/goodbye"
-        android:visibility="gone"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Gaza"
-        android:id="@+id/gaza"
-        android:visibility="gone"/>
-
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/red"
+        android:visibility="gone"
+        android:scaleType="centerCrop" />
 </RelativeLayout>
