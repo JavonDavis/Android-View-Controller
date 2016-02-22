@@ -124,6 +124,16 @@ public class FlipController {
         }
     }
 
+    public void setForwardAnimationDuration(long duration)
+    {
+        getDefaultForwardAnimation().setDuration(duration);
+    }
+
+    public void setBackwardAnimationDuration(long duration)
+    {
+        getDefaultForwardAnimation().setDuration(duration);
+    }
+
     /**
      *
      * @return the next view

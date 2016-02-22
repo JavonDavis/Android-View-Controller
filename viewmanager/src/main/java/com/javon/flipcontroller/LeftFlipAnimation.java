@@ -1,12 +1,14 @@
 package com.javon.flipcontroller;
 
 import android.animation.Animator;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 
 /**
+ * Class to change one view to the next through a flip animation to the right
  * @author Javon Davis
  *         Created by Javon Davis on 21/02/16.
  */
@@ -40,33 +42,20 @@ public class LeftFlipAnimation extends ControllerAnimator {
         //clearing the listener is important as it would cause an infinite
         // loop in onAnimationEnd due to the ViewPropertyAnimator in the map created
         oldView.animate().setListener(null).rotationYBy(-90).setInterpolator
-                (new AccelerateInterpolator()).setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-            }
+                (new AccelerateInterpolator()).setDuration(getDuration());
 
-            @Override
-            public void onAnimationEnd(Animator animation) {
+        Handler mHandler = new Handler();
 
-                newView.setVisibility(View.VISIBLE);
+        mHandler.postDelayed(new Runnable() {
+            public void run() {
                 oldView.setVisibility(View.INVISIBLE);
+                newView.setVisibility(View.VISIBLE);
 
                 //remember to clear the listener
                 newView.animate().setListener(null).rotationYBy(-90).setDuration(getDuration());
-                oldView.setRotationY(-180);
-
+                oldView.setRotationY(-90);
             }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        }).setDuration(getDuration());
+        }, getDuration()-getDuration()/30); //subtract a small portion to smooth out the transition
     }
 
     @Override

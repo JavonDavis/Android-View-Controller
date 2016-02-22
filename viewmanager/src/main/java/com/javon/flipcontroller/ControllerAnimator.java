@@ -16,6 +16,7 @@ public abstract class ControllerAnimator extends Animation implements Animation.
 
     private View.OnClickListener oldViewListener;
     private View.OnClickListener newViewListener;
+    private int threshold;
 
     /**
      * Default Constructor
