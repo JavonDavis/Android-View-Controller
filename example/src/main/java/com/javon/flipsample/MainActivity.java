@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.javon.flipcontroller.FlipController;
 import com.javon.flipcontroller.LeftFlipAnimation;
 import com.javon.flipcontroller.RightFlipAnimation;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,21 +21,11 @@ public class MainActivity extends AppCompatActivity {
         final TextView hello = (TextView) findViewById(R.id.hello);
         final TextView goodbye = (TextView) findViewById(R.id.goodbye);
 
-        hello.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RightFlipAnimation animation = new RightFlipAnimation(hello,goodbye);
-                hello.startAnimation(animation);
-            }
-        });
+        ArrayList<View> views = new ArrayList<>();
+        views.add(hello);
+        views.add(goodbye);
 
-        goodbye.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LeftFlipAnimation animation = new LeftFlipAnimation(goodbye,hello);
-                goodbye.startAnimation(animation);
-            }
-        });
+        FlipController controller = new FlipController(views,true);
 
     }
 }

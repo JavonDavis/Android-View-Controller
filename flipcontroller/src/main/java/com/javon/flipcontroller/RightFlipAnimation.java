@@ -10,47 +10,38 @@ import android.view.animation.Animation;
  * @author Javon Davis
  *         Created by Javon Davis on 21/02/16.
  */
-public class RightFlipAnimation extends Animation implements Animation.AnimationListener {
-
-    private static final int DEFAULT_DURATION = 1000;
-
-    private View mOldView;
-    private View mNewView;
+public class RightFlipAnimation extends ControllerAnimator {
 
     public RightFlipAnimation(View oldView, View newView)
     {
-        this.mOldView = oldView;
-        this.mNewView = newView;
-        this.mNewView.setLayoutParams(this.mOldView.getLayoutParams());
-        setDuration(DEFAULT_DURATION);
-        setAnimationListener(this);
+        super(oldView,newView);
     }
 
 
     @Override
     public void onAnimationStart(Animation animation) {
-        Log.d("Animation","Started");
-        mNewView.setRotationY(-90);
+        final View oldView = getOldView();
+        final View newView = getNewView();
+
+        newView.setRotationY(-90);
 
         //clearing the listener is important as it would cause an infinite
-        // loop in onAnimationEnd due to the ViewProperityAnimator in the map created
-        mOldView.animate().setListener(null).rotationYBy(90).setInterpolator
+        // loop in onAnimationEnd due to the ViewPropertyAnimator in the map created
+        oldView.animate().setListener(null).rotationYBy(90).setInterpolator
                 (new AccelerateInterpolator()).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
-                Log.d("Inner Animation","Started");
             }
 
             @Override
             public void onAnimationEnd(Animator animation) {
 
-                mNewView.setVisibility(View.VISIBLE);
-                mOldView.setVisibility(View.INVISIBLE);
+                newView.setVisibility(View.VISIBLE);
+                oldView.setVisibility(View.INVISIBLE);
 
                 //remember to clear the listener
-                mNewView.animate().setListener(null).rotationYBy(90).setDuration(getDuration());
-                mOldView.setRotationY(180);
-                Log.d("Inner Animation","Ended");
+                newView.animate().setListener(null).rotationYBy(90).setDuration(getDuration());
+                oldView.setRotationY(180);
 
             }
 

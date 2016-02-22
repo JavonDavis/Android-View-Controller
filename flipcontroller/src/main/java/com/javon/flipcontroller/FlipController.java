@@ -1,9 +1,9 @@
 package com.javon.flipcontroller;
 
 import android.view.View;
-import android.view.animation.Animation;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * @author Javon Davis
@@ -11,10 +11,11 @@ import java.util.ArrayList;
  */
 public class FlipController {
 
-    private Animation mDefaultForwardAnimation;
-    private Animation mDefaultBackwardAnimation;
+    private ControllerAnimator mDefaultForwardAnimation;
+    private ControllerAnimator mDefaultBackwardAnimation;
 
     private ArrayList<View> mViews;
+    private ListIterator<View> iterator;
 
     /**
      *
@@ -23,6 +24,8 @@ public class FlipController {
     public FlipController(ArrayList<View> views, boolean useDefaultListeners)
     {
         this.mViews = views;
+        this.iterator = views.listIterator();
+
         if(useDefaultListeners)
             setupListeners();
     }
@@ -33,7 +36,7 @@ public class FlipController {
      * @param defaultForwardAnimation - animation to be used whenever going to the next view in the list
      * @param defaultBackwardAnimation - animation to be used whenever going back to the previous view in the list
      */
-    public FlipController(ArrayList<View> views,Animation defaultForwardAnimation, Animation defaultBackwardAnimation, boolean useDefaultListeners) {
+    public FlipController(ArrayList<View> views,ControllerAnimator defaultForwardAnimation, ControllerAnimator defaultBackwardAnimation, boolean useDefaultListeners) {
         this(views,useDefaultListeners);
         this.mDefaultForwardAnimation = defaultForwardAnimation;
         this.mDefaultBackwardAnimation = defaultBackwardAnimation;
@@ -44,7 +47,58 @@ public class FlipController {
      */
     public void next()
     {
+        if(iterator.hasNext()) {
+            View currentView = iterator.next();
 
+            if (iterator.nextIndex() < mViews.size()) {
+                View nextView = mViews.get(iterator.nextIndex());
+
+                ControllerAnimator animator = getDefaultForwardAnimation();
+                if (animator != null) {
+                    currentView.startAnimation(animator);
+                } else {
+                    animator = new RightFlipAnimation(currentView, nextView);
+                    currentView.startAnimation(animator);
+                }
+
+            }
+        }
+    }
+
+    /**
+     * Go to the next view using the animator passed in
+     * @param animator - the animator to use for the next view change
+     */
+    public void next(ControllerAnimator animator)
+    {
+        View currentView = getCurrentView();
+        if(animator != null)
+        {
+            currentView.startAnimation(animator);
+            iterator.next();
+        }
+        else
+        {
+            throw new NullPointerException("Animator cannot be null");
+        }
+    }
+
+    /**
+     *
+     * @return the next view
+     */
+    public View nextView()
+    {
+        return mViews.get(iterator.nextIndex());
+    }
+
+    /**
+     *
+     * @return the current view
+     */
+    public View getCurrentView()
+    {
+        return mViews.get(iterator.previousIndex()+1);
     }
 
     /**
@@ -52,7 +106,23 @@ public class FlipController {
      */
     public void previous()
     {
+        if(iterator.hasPrevious())
+        {
+            View previousView = iterator.previous();
+            View currentView = mViews.get(iterator.nextIndex()-1);
 
+            ControllerAnimator animator = getDefaultBackwardAnimation();
+            if(animator != null)
+            {
+                currentView.startAnimation(animator);
+            }
+            else
+            {
+                animator = new LeftFlipAnimation(currentView,previousView);
+                currentView.startAnimation(animator);
+            }
+
+        }
     }
 
     /**
@@ -74,7 +144,7 @@ public class FlipController {
      *
      * @return the default animation for next
      */
-    public Animation getDefaultForwardAnimation() {
+    public ControllerAnimator getDefaultForwardAnimation() {
         return mDefaultForwardAnimation;
     }
 
@@ -82,7 +152,7 @@ public class FlipController {
      *
      * @param defaultForwardAnimation the default animation for next
      */
-    public void setDefaultForwardAnimation(Animation defaultForwardAnimation) {
+    public void setDefaultForwardAnimation(ControllerAnimator defaultForwardAnimation) {
         this.mDefaultForwardAnimation = defaultForwardAnimation;
     }
 
@@ -90,7 +160,7 @@ public class FlipController {
      *
      * @return the default animation for previous
      */
-    public Animation getDefaultBackwardAnimation() {
+    public ControllerAnimator getDefaultBackwardAnimation() {
         return mDefaultBackwardAnimation;
     }
 
@@ -98,7 +168,7 @@ public class FlipController {
      *
      * @param defaultBackwardAnimation the default animation for previous
      */
-    public void setDefaultBackwardAnimation(Animation defaultBackwardAnimation) {
+    public void setDefaultBackwardAnimation(ControllerAnimator defaultBackwardAnimation) {
         this.mDefaultBackwardAnimation = defaultBackwardAnimation;
     }
 
