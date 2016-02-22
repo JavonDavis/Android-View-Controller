@@ -1,1 +1,1 @@
-include ':example', ':flipcontroller'
+include ':example', ':viewmanager'

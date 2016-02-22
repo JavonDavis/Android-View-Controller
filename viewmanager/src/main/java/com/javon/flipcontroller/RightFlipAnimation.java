@@ -1,7 +1,6 @@
 package com.javon.flipcontroller;
 
 import android.animation.Animator;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -37,7 +36,7 @@ public class RightFlipAnimation extends ControllerAnimator {
             public void onAnimationEnd(Animator animation) {
 
                 newView.setVisibility(View.VISIBLE);
-                oldView.setVisibility(View.INVISIBLE);
+                oldView.setVisibility(View.GONE);
 
                 //remember to clear the listener
                 newView.animate().setListener(null).rotationYBy(90).setDuration(getDuration());
