@@ -19,4 +19,5 @@
     <string name="grapes_are_a_really_purple_type_of_fruit">Grapes are a really purple type of fruit.</string>
     <string name="oranges_are_a_really_orange_type_of_fruit_lol">Oranges are a really orange type of fruit lol</string>
     <string name="shaking_fruits">Shaking Fruits</string>
+    <string name="sample_with_recyclerview">Sample with RecyclerView</string>
 </resources>

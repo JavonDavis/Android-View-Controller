@@ -6,6 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.javon.viewmanager.samples.CustomAnimatorSampleActivity;
+import com.javon.viewmanager.samples.ImageViewSampleActivity;
+import com.javon.viewmanager.samples.RecyclerViewSampleActivity;
+import com.javon.viewmanager.samples.TextViewSampleActivity;
+import com.javon.viewmanager.samples.ViewGroupSampleActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -17,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Button imageViewSampleButton = (Button) findViewById(R.id.imageview_sample);
         Button viewGroupSampleButton = (Button) findViewById(R.id.viewgroup_sample);
         Button customAnimatorSampleButton = (Button) findViewById(R.id.animator_sample);
+        Button recyclerViewSampleButton = (Button) findViewById(R.id.recyclerview_sample);
 
         textViewSampleButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,CustomAnimatorSampleActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        recyclerViewSampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RecyclerViewSampleActivity.class);
                 startActivity(intent);
             }
         });

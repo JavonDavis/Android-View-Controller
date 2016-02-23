@@ -1,4 +1,4 @@
-package com.javon.viewmanager;
+package com.javon.viewmanager.samples;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.javon.flipcontroller.controllers.Controller;
+import com.javon.viewmanager.R;
 
 import java.util.ArrayList;
 

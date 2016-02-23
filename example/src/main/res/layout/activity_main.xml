@@ -54,8 +54,15 @@
             android:text="@string/custom_animator_sample"
             android:id="@+id/animator_sample"
             android:background="#7C4DFF"
+            android:layout_marginBottom="5dp"
             android:layout_gravity="center_horizontal" />
 
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="@string/sample_with_recyclerview"
+            android:id="@+id/recyclerview_sample"
+            android:background="#ff28e9"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </ScrollView>

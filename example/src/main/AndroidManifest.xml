@@ -15,10 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TextViewSampleActivity" />
-        <activity android:name=".ImageViewSampleActivity" />
-        <activity android:name=".ViewGroupSampleActivity" />
-        <activity android:name=".CustomAnimatorSampleActivity"></activity>
+        <activity android:name=".samples.TextViewSampleActivity" />
+        <activity android:name=".samples.ImageViewSampleActivity" />
+        <activity android:name=".samples.ViewGroupSampleActivity" />
+        <activity android:name=".samples.CustomAnimatorSampleActivity" />
+        <activity android:name=".samples.RecyclerViewSampleActivity"></activity>
     </application>
 
 </manifest>

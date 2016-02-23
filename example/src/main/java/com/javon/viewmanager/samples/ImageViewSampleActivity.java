@@ -1,4 +1,4 @@
-package com.javon.viewmanager;
+package com.javon.viewmanager.samples;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.javon.flipcontroller.animators.FadingAnimator;
 import com.javon.flipcontroller.controllers.Controller;
+import com.javon.viewmanager.R;
 
 import java.util.ArrayList;
 
