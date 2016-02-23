@@ -4,6 +4,30 @@ An Android library for cycling through views using animations. The library provi
 
 Examples of how to use the library have been provided in the example module, you can build and run the app to see it in action.
 
+##Installing
+This library can be installed one of 3 ways.
+
+###As a gradle dependency
+
+Simply add the following line to the dependencies in your module level build.gradle
+
+```groovy
+compile 'com.javon.viewmanager:viewmanager:1.0.0'
+```
+###Specifying it as a dependency through maven
+```xml
+<dependency>
+  <groupId>com.javon.viewmanager</groupId>
+  <artifactId>viewmanager</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
+</dependency>
+```
+
+#### As a library project
+
+Download the source code and import it as a library project in Eclipse. The project is available in the folder **viewmanager**. For more information on how to do this, read [here](http://developer.android.com/tools/projects/index.html#LibraryProjects).
+
 ##Usage
 
 ###Define views
@@ -91,26 +115,64 @@ Controller controller = new Controller(views);
 
 ***Note this will use the default animation of flipping.***
 
-##Installing
-This library can be installed one of 3 ways.
+##Customizations
 
-###As a gradle dependency
+Three animations have been provided in the library RightFlipAnimator LeftFlipAnimator and Fade Animator and a shake animator was also made in the example but is not included in the library as yet. The default is set to be RightFlipAnimator for forward and LeftFlipAnimator backward. If you would like to change it to the fading animation you can use the setter method provided or the constructor which accepts animators as parameters. See example below
 
-Simply add the following line to the dependencies in your module level build.gradle
-
-```groovy
-compile 'com.javon.viewmanager:viewmanager:1.0.0'
-```
-###Specifying it as a dependency through maven
-```xml
-<dependency>
-  <groupId>com.javon.viewmanager</groupId>
-  <artifactId>viewmanager</artifactId>
-  <version>1.0.0</version>
-  <type>pom</type>
-</dependency>
+```Java
+Controller controller = new Controller(views,true,false, new FadingAnimator(),new FadingAnimator());
 ```
 
-#### As a library project
+The two boolean parameters before the animators specify whether the controller should use the default listener or not, and whether it should loop around when the ArrayList has been exhausted or not.
 
-Download the source code and import it as a library project in Eclipse. The project is available in the folder **viewmanager**. For more information on how to do this, read [here](http://developer.android.com/tools/projects/index.html#LibraryProjects).
+If you would like to use a custom animation, your class will need to extend the ControllerAnimator class in the library. This class extends the Animation class and also implements the AnimationListener interface, so certain helper methods are will be available.See below for an example
+
+```Java
+class ShakeAnimator extends ControllerAnimator
+    {
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+            final View oldView = getOldView();
+            final View newView = getNewView();
+
+            Animation shake = AnimationUtils.loadAnimation(CustomAnimatorSampleActivity.this, R.anim.shake);
+            shake.setDuration(getDuration());
+            shake.setAnimationListener(new AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    oldView.setVisibility(View.GONE);
+                    newView.setVisibility(View.VISIBLE);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+
+                }
+            });
+            oldView.startAnimation(shake);
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+    }
+```
+
+The following animation can be demoed in the example module of the project.
+
+##Contributions
+Please fork this repository and contribute back using [pull requests](https://github.com/JA-VON/ParseRecyclerViewAdapter/pulls). Features can be requested using [issues](https://github.com/JA-VON/ParseRecyclerViewAdapter/issues). All code, comments, and critiques are greatly appreciated.
+
+Encouraged contributions are more animators that can be included as default options in the library. Please see the ControllerAnimator classs as all animators will need to extend this. This class main purpose is to enforce the presence of both an oldView to transition from and a newView to transition to.
