@@ -1,6 +1,6 @@
 # Android View Controller
 
-An Android library for cycling through views using animations. The library provides 2 animations as built it animations, a flip animation and a fade animation.
+An Android library for cycling through views using animations. The library provides 2 animations as built in animations: a flip animation and a fade animation.
 
 Examples of how to use the library have been provided in the example module, you can build and run the app to see it in action.
 
@@ -31,7 +31,7 @@ Download the source code and import it as a library project in Eclipse. The proj
 ##Usage
 
 ###Define views
-First thing you need is to prepare the views you want to be included in the controller. You can do this by inflating them in Java using the LayoutInflator class or just placing them in the xml. See below for an example xml the activity_image_view_sample.xml from the example module in the project.
+First thing you need to do is to prepare the views you want to be included in the controller. You can do this by inflating them in Java using the LayoutInflator class or just placing them in the xml. See below for an example xml the activity_image_view_sample.xml from the example module in the project.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -90,7 +90,7 @@ First thing you need is to prepare the views you want to be included in the cont
 </RelativeLayout>
 ```
 
-Note in the xml above only one of the ImageViews are visible. Only the view you would like to be seen first should be visible, all other views that will be shown should have their visibility set to GONE. 
+Note in the xml above only one of the ImageViews is visible. Only the view you would like to be seen first should be visible, all other views that will be shown should have their visibility set to GONE. 
 
 ###Populate ArrayList
 After inflating the views an ArrayList will need to be constructed which contains the views in the order they should be shown, this will be the ArrayList that will be passed into the Controller class. ***It is important that the Views are in the ArrayList in the order you would like them to appear!***
@@ -125,7 +125,7 @@ Controller controller = new Controller(views,true,false, new FadingAnimator(),ne
 
 The two boolean parameters before the animators specify whether the controller should use the default listener or not, and whether it should loop around when the ArrayList has been exhausted or not.
 
-If you would like to use a custom animation, your class will need to extend the ControllerAnimator class in the library. This class extends the Animation class and also implements the AnimationListener interface, so certain helper methods are will be available.See below for an example
+If you would like to use a custom animation, your class will need to extend the ControllerAnimator class in the library. This class extends the Animation class and also implements the AnimationListener interface, so certain helper methods will be available.See below for an example
 
 ```Java
 class ShakeAnimator extends ControllerAnimator
@@ -173,6 +173,6 @@ class ShakeAnimator extends ControllerAnimator
 The following animation can be demoed in the example module of the project.
 
 ##Contributions
-Please fork this repository and contribute back using [pull requests](https://github.com/JA-VON/ParseRecyclerViewAdapter/pulls). Features can be requested using [issues](https://github.com/JA-VON/ParseRecyclerViewAdapter/issues). All code, comments, and critiques are greatly appreciated.
+Please fork this repository and contribute back using [pull requests](https://github.com/JA-VON/Android-View-Controller/pulls). Features can be requested using [issues](https://github.com/JA-VON/Android-View-Controller/issues). All code, comments, and critiques are greatly appreciated.
 
 Encouraged contributions are more animators that can be included as default options in the library. Please see the ControllerAnimator classs as all animators will need to extend this. This class main purpose is to enforce the presence of both an oldView to transition from and a newView to transition to.
