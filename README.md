@@ -69,7 +69,7 @@ First thing you need is to prepare the views you want to be included in the cont
 Note in the xml above only one of the ImageViews are visible. Only the view you would like to be seen first should be visible, all other views that will be shown should have their visibility set to GONE. 
 
 ###Populate ArrayList
-After inflating the views an ArrayList will need to be constructed which contains the views in the order they should be shown, this will be the ArrayList that will be passed into the Controller class. It is important that the Views are in the ArrayList in the order you would like them to appear!
+After inflating the views an ArrayList will need to be constructed which contains the views in the order they should be shown, this will be the ArrayList that will be passed into the Controller class. ***It is important that the Views are in the ArrayList in the order you would like them to appear!***
 
 ###That's it
 After that just pass them into the Constructor of the Controller class and that's it! See below for an example how you would do this using the views from the xml above. 
@@ -89,7 +89,28 @@ views.add(orangesView);
 Controller controller = new Controller(views);
 ```
 
-Note this will use the default animation of flipping. 
+***Note this will use the default animation of flipping.***
 
 ##Installing
+This library can be installed one of 3 ways.
 
+###As a gradle dependency
+
+Simply add the following line to the dependencies in your module level build.gradle
+
+```groovy
+compile 'com.javon.viewmanager:viewmanager:1.0.0'
+```
+###Specifying it as a dependency through maven
+```xml
+<dependency>
+  <groupId>com.javon.viewmanager</groupId>
+  <artifactId>viewmanager</artifactId>
+  <version>1.0.0</version>
+  <type>pom</type>
+</dependency>
+```
+
+#### As a library project
+
+Download the source code and import it as a library project in Eclipse. The project is available in the folder **viewmanager**. For more information on how to do this, read [here](http://developer.android.com/tools/projects/index.html#LibraryProjects).
