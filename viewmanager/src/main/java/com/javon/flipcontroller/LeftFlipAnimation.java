@@ -37,6 +37,8 @@ public class LeftFlipAnimation extends ControllerAnimator {
         final View oldView = getOldView();
         final View newView = getNewView();
 
+        newView.setVisibility(View.INVISIBLE);
+
         newView.setRotationY(90);
 
         //clearing the listener is important as it would cause an infinite
@@ -48,8 +50,8 @@ public class LeftFlipAnimation extends ControllerAnimator {
 
         mHandler.postDelayed(new Runnable() {
             public void run() {
-                oldView.setVisibility(View.INVISIBLE);
                 newView.setVisibility(View.VISIBLE);
+                oldView.setVisibility(View.INVISIBLE);
 
                 //remember to clear the listener
                 newView.animate().setListener(null).rotationYBy(-90).setDuration(getDuration());

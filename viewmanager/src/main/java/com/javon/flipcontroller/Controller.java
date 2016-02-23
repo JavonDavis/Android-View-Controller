@@ -9,7 +9,7 @@ import java.util.ListIterator;
  * @author Javon Davis
  *         Created by Javon Davis on 21/02/16.
  */
-public class FlipController {
+public class Controller {
 
     private ControllerAnimator mDefaultForwardAnimation;
     private ControllerAnimator mDefaultBackwardAnimation;
@@ -19,7 +19,7 @@ public class FlipController {
     private boolean mLoop;
     private ViewListener listener;
 
-    public FlipController(ArrayList<View> views)
+    public Controller(ArrayList<View> views)
     {
         this(views,true);
     }
@@ -29,11 +29,9 @@ public class FlipController {
      * @param views - list of views to be used in the correct order
      * @param useDefaultListeners - if true, the default onlick listener will be used which is an onClick listener on the entire view
      */
-    public FlipController(ArrayList<View> views, boolean useDefaultListeners)
+    public Controller(ArrayList<View> views, boolean useDefaultListeners)
     {
         this(views,useDefaultListeners,null,null,true);
-
-
     }
 
     /**
@@ -44,7 +42,7 @@ public class FlipController {
      * @param defaultBackwardAnimation - animation to be used whenever going back to the previous view in the list, if null the default is used
      * @param loop - if true it will loop around the list of views and start from the beginning
      */
-    public FlipController(ArrayList<View> views, boolean useDefaultListeners,ControllerAnimator defaultForwardAnimation, ControllerAnimator defaultBackwardAnimation,boolean loop) {
+    public Controller(ArrayList<View> views, boolean useDefaultListeners, ControllerAnimator defaultForwardAnimation, ControllerAnimator defaultBackwardAnimation, boolean loop) {
         this.mViews = views;
         this.iterator = views.listIterator();
 
@@ -115,41 +113,30 @@ public class FlipController {
             throw new NullPointerException("Animator cannot be null");
 
         if(iterator.hasNext()) {
-            View currentView = getCurrentView();
-            View nextView = getNextView();
+            View currentView = iterator.next();
+            currentView.setOnClickListener(null);
 
-            animator.setOldView(currentView);
-            animator.setNewView(nextView);
-            currentView.startAnimation(animator);
+            if (iterator.nextIndex() < mViews.size()) {
+                View nextView = mViews.get(iterator.nextIndex());
+                nextView.setOnClickListener(listener);
+                animator.setOldView(currentView);
+                animator.setNewView(nextView);
+
+                currentView.startAnimation(animator);
+
+            } else {
+                if (mLoop) {
+                    iterator = mViews.listIterator();
+                    View nextView = mViews.get(0);
+                    nextView.setOnClickListener(listener);
+
+                    animator.setOldView(currentView);
+                    animator.setNewView(nextView);
+
+                    currentView.startAnimation(animator);
+                }
+            }
         }
-    }
-
-    public void setForwardAnimationDuration(long duration)
-    {
-        getDefaultForwardAnimation().setDuration(duration);
-    }
-
-    public void setBackwardAnimationDuration(long duration)
-    {
-        getDefaultForwardAnimation().setDuration(duration);
-    }
-
-    /**
-     *
-     * @return the next view
-     */
-    public View getNextView()
-    {
-        return mViews.get(iterator.nextIndex());
-    }
-
-    /**
-     *
-     * @return the current view
-     */
-    public View getCurrentView()
-    {
-        return mViews.get(iterator.previousIndex()+1);
     }
 
     /**
@@ -159,20 +146,83 @@ public class FlipController {
     {
         if(iterator.hasPrevious())
         {
-            View previousView = iterator.previous();
-            View currentView = mViews.get(iterator.nextIndex()-1);
+            View currentView = mViews.get(iterator.nextIndex());
 
-            ControllerAnimator animator = getDefaultBackwardAnimation();
-            if(animator != null)
-            {
+            if(iterator.nextIndex() > 0) {
+                View previousView = iterator.previous();
+
+                previousView.setOnClickListener(listener);
+
+                ControllerAnimator animator = getDefaultBackwardAnimation();
+
+                animator.setOldView(currentView);
+                animator.setNewView(previousView);
                 currentView.startAnimation(animator);
             }
-            else
+
+        }
+        else
+        {
+            if(mLoop)
             {
-                animator = new LeftFlipAnimation(currentView,previousView);
+                iterator = mViews.listIterator();
+                for(int i = 0; i< mViews.size()-1;i++)
+                {
+                    iterator.next();
+                }
+
+                View currentView = mViews.get(0);
+                View previousView = mViews.get(mViews.size()-1);
+                previousView.setOnClickListener(listener);
+
+                ControllerAnimator animator = getDefaultBackwardAnimation();
+
+                animator.setOldView(currentView);
+                animator.setNewView(previousView);
+                currentView.startAnimation(animator);
+            }
+        }
+    }
+
+    public void previous(ControllerAnimator animator)
+    {
+        if(animator == null)
+            throw new NullPointerException("Animator cannot be null");
+
+        if(iterator.hasPrevious())
+        {
+
+            View currentView = mViews.get(iterator.nextIndex());
+
+            if(iterator.nextIndex() > 0) {
+                View previousView = iterator.previous();
+
+                previousView.setOnClickListener(listener);
+
+                animator.setOldView(currentView);
+                animator.setNewView(previousView);
                 currentView.startAnimation(animator);
             }
 
+        }
+        else
+        {
+            if(mLoop)
+            {
+                iterator = mViews.listIterator();
+                for(int i = 0; i< mViews.size()-1;i++)
+                {
+                    iterator.next();
+                }
+
+                View currentView = mViews.get(0);
+                View previousView = mViews.get(mViews.size()-1);
+                previousView.setOnClickListener(listener);
+
+                animator.setOldView(currentView);
+                animator.setNewView(previousView);
+                currentView.startAnimation(animator);
+            }
         }
     }
 
@@ -213,6 +263,36 @@ public class FlipController {
             this.mDefaultForwardAnimation = new RightFlipAnimation();
         else
             this.mDefaultForwardAnimation = defaultForwardAnimation;
+    }
+
+
+
+    public void setForwardAnimationDuration(long duration)
+    {
+        getDefaultForwardAnimation().setDuration(duration);
+    }
+
+    public void setBackwardAnimationDuration(long duration)
+    {
+        getDefaultForwardAnimation().setDuration(duration);
+    }
+
+    /**
+     *
+     * @return the next view
+     */
+    public View getNextView()
+    {
+        return mViews.get(iterator.nextIndex());
+    }
+
+    /**
+     *
+     * @return the current view
+     */
+    public View getCurrentView()
+    {
+        return mViews.get(iterator.previousIndex()+1);
     }
 
     /**
@@ -264,6 +344,14 @@ public class FlipController {
         @Override
         public void onClick(View v) {
             next();
+        }
+    }
+
+    private class TestViewListener implements View.OnLongClickListener {
+        @Override
+        public boolean onLongClick(View v) {
+            previous();
+            return false;
         }
     }
 }

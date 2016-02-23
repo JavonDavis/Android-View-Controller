@@ -59,16 +59,4 @@ public abstract class ControllerAnimator extends Animation implements Animation.
         if(mOldView != null)
             this.mNewView.setLayoutParams(mOldView.getLayoutParams());
     }
-
-    @Override
-    public void onAnimationStart(Animation animation) {
-        View oldView = getOldView();
-        View newView = getNewView();
-
-        if(oldView == null || newView ==null)
-        {
-            throw new NullPointerException("No view allowed to be null when animation started");
-        }
-
-    }
 }
