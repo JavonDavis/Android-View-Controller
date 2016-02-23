@@ -25,12 +25,7 @@ public class MainActivity extends AppCompatActivity {
         views.add(img1);
         views.add(img2);
 
-        controller = new Controller(views);
+        controller = new Controller(views,true,true);
 
-    }
-
-    @Override
-    public void onBackPressed() {
-        controller.previous();
     }
 }

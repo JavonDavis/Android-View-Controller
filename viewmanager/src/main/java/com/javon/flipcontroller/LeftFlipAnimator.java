@@ -1,6 +1,8 @@
 package com.javon.flipcontroller;
 
+import android.animation.Animator;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -10,19 +12,23 @@ import android.view.animation.Animation;
  * @author Javon Davis
  *         Created by Javon Davis on 21/02/16.
  */
-public class RightFlipAnimation extends ControllerAnimator {
+public class LeftFlipAnimator extends ControllerAnimator {
 
     /**
-     * Default Constuctor
+     *
+     * @param oldView - the view to transition from
+     * @param newView - the view to transition to
      */
-    public RightFlipAnimation()
-    {
-        super();
-    }
-
-    public RightFlipAnimation(View oldView, View newView)
+    public LeftFlipAnimator(View oldView, View newView)
     {
         super(oldView,newView);
+    }
+
+    /**
+     * Default Constructor
+     */
+    public LeftFlipAnimator() {
+        super();
     }
 
 
@@ -31,14 +37,16 @@ public class RightFlipAnimation extends ControllerAnimator {
         final View oldView = getOldView();
         final View newView = getNewView();
 
-        newView.setRotationY(-90);
+        newView.setVisibility(View.INVISIBLE);
 
-        Handler mHandler = new Handler();
+        newView.setRotationY(90);
 
         //clearing the listener is important as it would cause an infinite
         // loop in onAnimationEnd due to the ViewPropertyAnimator in the map created
-        oldView.animate().setListener(null).rotationYBy(90).setInterpolator
+        oldView.animate().setListener(null).rotationYBy(-90).setInterpolator
                 (new AccelerateInterpolator()).setDuration(getDuration());
+
+        Handler mHandler = new Handler();
 
         mHandler.postDelayed(new Runnable() {
             public void run() {
@@ -46,8 +54,8 @@ public class RightFlipAnimation extends ControllerAnimator {
                 oldView.setVisibility(View.INVISIBLE);
 
                 //remember to clear the listener
-                newView.animate().setListener(null).rotationYBy(90).setDuration(getDuration());
-                oldView.setRotationY(90);
+                newView.animate().setListener(null).rotationYBy(-90).setDuration(getDuration());
+                oldView.setRotationY(-90);
             }
         }, getDuration()-getDuration()/30); //subtract a small portion to smooth out the transition
     }

@@ -21,7 +21,7 @@ public class Controller {
 
     public Controller(ArrayList<View> views)
     {
-        this(views,true);
+        this(views,true,false);
     }
 
     /**
@@ -29,9 +29,9 @@ public class Controller {
      * @param views - list of views to be used in the correct order
      * @param useDefaultListeners - if true, the default onlick listener will be used which is an onClick listener on the entire view
      */
-    public Controller(ArrayList<View> views, boolean useDefaultListeners)
+    public Controller(ArrayList<View> views, boolean useDefaultListeners,boolean loop)
     {
-        this(views,useDefaultListeners,null,null,true);
+        this(views,useDefaultListeners,null,null,loop);
     }
 
     /**
@@ -54,12 +54,12 @@ public class Controller {
         this.mLoop = loop;
 
         if(defaultForwardAnimation == null)
-            this.mDefaultForwardAnimation = new RightFlipAnimation();
+            this.mDefaultForwardAnimation = new FadingAnimator();
         else
             this.mDefaultForwardAnimation = defaultForwardAnimation;
 
         if(defaultBackwardAnimation == null)
-            this.mDefaultBackwardAnimation = new LeftFlipAnimation();
+            this.mDefaultBackwardAnimation = new LeftFlipAnimator();
         else
             this.mDefaultBackwardAnimation = defaultBackwardAnimation;
     }
@@ -184,6 +184,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Go back to the previous view
+     * @param animator - the animator to be used for the transition
+     */
     public void previous(ControllerAnimator animator)
     {
         if(animator == null)
@@ -227,26 +231,6 @@ public class Controller {
     }
 
     /**
-     * set default onClicklistener on all the views
-     */
-    private void setupListeners() {
-        for(View view:mViews)
-        {
-            view.setOnClickListener(listener);
-        }
-    }
-
-    /**
-     * remove onClicklistener on all the views
-     */
-    private void removeListeners() {
-        for(View view:mViews)
-        {
-            view.setOnClickListener(null);
-        }
-    }
-
-    /**
      *
      * @return the default animation for next
      */
@@ -260,18 +244,25 @@ public class Controller {
      */
     public void setDefaultForwardAnimation(ControllerAnimator defaultForwardAnimation) {
         if(defaultForwardAnimation == null)
-            this.mDefaultForwardAnimation = new RightFlipAnimation();
+            this.mDefaultForwardAnimation = new RightFlipAnimator();
         else
             this.mDefaultForwardAnimation = defaultForwardAnimation;
     }
 
 
-
+    /**
+     * Set the duration for the default forward animation
+     * @param duration - duration in milliseconds
+     */
     public void setForwardAnimationDuration(long duration)
     {
         getDefaultForwardAnimation().setDuration(duration);
     }
 
+    /**
+     * Set the duration for the default backward animation
+     * @param duration - duration in milliseconds
+     */
     public void setBackwardAnimationDuration(long duration)
     {
         getDefaultForwardAnimation().setDuration(duration);
@@ -309,49 +300,68 @@ public class Controller {
      */
     public void setDefaultBackwardAnimation(ControllerAnimator defaultBackwardAnimation) {
         if(defaultBackwardAnimation == null)
-            this.mDefaultBackwardAnimation = new LeftFlipAnimation();
+            this.mDefaultBackwardAnimation = new LeftFlipAnimator();
         else
             this.mDefaultBackwardAnimation = defaultBackwardAnimation;
     }
 
+    /**
+     *
+     * @return - all the views
+     */
     public ArrayList<View> getViews() {
         return mViews;
     }
 
+    /**
+     *
+     * @param views - the views to be used
+     */
     public void setViews(ArrayList<View> views) {
         this.mViews = views;
     }
 
+    /**
+     *
+     * @return - the iterator being used on the views
+     */
     public ListIterator<View> getIterator() {
         return iterator;
     }
 
+    /**
+     *
+     * @param iterator - the iterator to be used on the views
+     */
     public void setIterator(ListIterator<View> iterator) {
         this.iterator = iterator;
     }
 
+    /**
+     * Similar to getting the iterator and calling hasNext on it
+     * @return if the iterator has a next view
+     */
     public boolean hasNext()
     {
         return iterator.hasNext();
     }
 
+    /**
+     * Similar to getting the iterator and calling hasPrevious on it
+     * @return if the iterator has a previous view
+     */
     public boolean hasPrevious()
     {
         return iterator.hasPrevious();
     }
 
+    /**
+     * Default view listener
+     */
     private class ViewListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             next();
-        }
-    }
-
-    private class TestViewListener implements View.OnLongClickListener {
-        @Override
-        public boolean onLongClick(View v) {
-            previous();
-            return false;
         }
     }
 }
