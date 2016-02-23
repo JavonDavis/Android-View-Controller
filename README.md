@@ -6,6 +6,7 @@ Examples of how to use the library have been provided in the example module, you
 
 ##Usage
 
+###Define views
 First thing you need is to prepare the views you want to be included in the controller. You can do this by inflating them in Java using the LayoutInflator class or just placing them in the xml. See below for an example xml the activity_image_view_sample.xml from the example module in the project.
 
 ```xml
@@ -65,4 +66,30 @@ First thing you need is to prepare the views you want to be included in the cont
 </RelativeLayout>
 ```
 
+Note in the xml above only one of the ImageViews are visible. Only the view you would like to be seen first should be visible, all other views that will be shown should have their visibility set to GONE. 
+
+###Populate ArrayList
+After inflating the views an ArrayList will need to be constructed which contains the views in the order they should be shown, this will be the ArrayList that will be passed into the Controller class. It is important that the Views are in the ArrayList in the order you would like them to appear!
+
+###That's it
+After that just pass them into the Constructor of the Controller class and that's it! See below for an example how you would do this using the views from the xml above. 
+
+```Java
+ImageView appleView = (ImageView) findViewById(R.id.apples_imageview);
+ImageView bananaView = (ImageView) findViewById(R.id.banana_imageview);
+ImageView grapesView = (ImageView) findViewById(R.id.grapes_imageview);
+ImageView orangesView = (ImageView) findViewById(R.id.oranges_imageview);
+
+ArrayList<View> views = new ArrayList<>();
+views.add(appleView);
+views.add(bananaView);
+views.add(grapesView);
+views.add(orangesView);
+
+Controller controller = new Controller(views);
+```
+
+Note this will use the default animation of flipping. 
+
+##Installing
 
