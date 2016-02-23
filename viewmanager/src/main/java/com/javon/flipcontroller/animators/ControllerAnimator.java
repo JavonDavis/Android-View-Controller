@@ -1,4 +1,4 @@
-package com.javon.flipcontroller;
+package com.javon.flipcontroller.animators;
 
 import android.view.View;
 import android.view.animation.Animation;
@@ -13,10 +13,6 @@ public abstract class ControllerAnimator extends Animation implements Animation.
     private View mNewView;
 
     private static final int DEFAULT_DURATION = 1000;
-
-    private View.OnClickListener oldViewListener;
-    private View.OnClickListener newViewListener;
-    private int threshold;
 
     /**
      * Default Constructor

@@ -1,6 +1,11 @@
-package com.javon.flipcontroller;
+package com.javon.flipcontroller.controllers;
 
 import android.view.View;
+
+import com.javon.flipcontroller.animators.ControllerAnimator;
+import com.javon.flipcontroller.animators.FadingAnimator;
+import com.javon.flipcontroller.animators.LeftFlipAnimator;
+import com.javon.flipcontroller.animators.RightFlipAnimator;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
@@ -18,7 +23,12 @@ public class Controller {
     private ListIterator<View> iterator;
     private boolean mLoop;
     private ViewListener listener;
+    private boolean mUseDefaultListener;
 
+    /**
+     *
+     * @param views - list of views to be used in the correct order
+     */
     public Controller(ArrayList<View> views)
     {
         this(views,true,false);
@@ -27,26 +37,28 @@ public class Controller {
     /**
      *
      * @param views - list of views to be used in the correct order
-     * @param useDefaultListeners - if true, the default onlick listener will be used which is an onClick listener on the entire view
+     * @param useDefaultListeners - if true, the default onClick listener will be used which is an onClick listener on the entire view
      */
     public Controller(ArrayList<View> views, boolean useDefaultListeners,boolean loop)
     {
-        this(views,useDefaultListeners,null,null,loop);
+        this(views,useDefaultListeners,loop,null,null);
     }
 
     /**
      *
      * @param views - list of views to be used in the correct order
      * @param useDefaultListeners - if true, the default onlick listener will be used which is an onClick listener on the entire view
+     * @param loop - if true it will loop around the list of views and start from the beginning
      * @param defaultForwardAnimation - animation to be used whenever going to the next view in the list, if null the default is used
      * @param defaultBackwardAnimation - animation to be used whenever going back to the previous view in the list, if null the default is used
-     * @param loop - if true it will loop around the list of views and start from the beginning
      */
-    public Controller(ArrayList<View> views, boolean useDefaultListeners, ControllerAnimator defaultForwardAnimation, ControllerAnimator defaultBackwardAnimation, boolean loop) {
+    public Controller(ArrayList<View> views, boolean useDefaultListeners, boolean loop, ControllerAnimator defaultForwardAnimation, ControllerAnimator defaultBackwardAnimation) {
         this.mViews = views;
         this.iterator = views.listIterator();
 
         listener = new ViewListener();
+
+        this.mUseDefaultListener = useDefaultListeners;
 
         if(useDefaultListeners)
             views.get(0).setOnClickListener(listener);
@@ -71,11 +83,14 @@ public class Controller {
     {
         if(iterator.hasNext()) {
             View currentView = iterator.next();
-            currentView.setOnClickListener(null);
+            if(mUseDefaultListener)
+                currentView.setOnClickListener(null);
 
             if (iterator.nextIndex() < mViews.size()) {
                 View nextView = mViews.get(iterator.nextIndex());
-                nextView.setOnClickListener(listener);
+
+                if(mUseDefaultListener)
+                    nextView.setOnClickListener(listener);
 
                 ControllerAnimator animator = getDefaultForwardAnimation();
 
@@ -91,7 +106,8 @@ public class Controller {
                 {
                     iterator = mViews.listIterator();
                     View nextView = mViews.get(0);
-                    nextView.setOnClickListener(listener);
+                    if(mUseDefaultListener)
+                        nextView.setOnClickListener(listener);
 
                     ControllerAnimator animator = getDefaultForwardAnimation();
 
@@ -114,11 +130,13 @@ public class Controller {
 
         if(iterator.hasNext()) {
             View currentView = iterator.next();
-            currentView.setOnClickListener(null);
+            if(mUseDefaultListener)
+                currentView.setOnClickListener(null);
 
             if (iterator.nextIndex() < mViews.size()) {
                 View nextView = mViews.get(iterator.nextIndex());
-                nextView.setOnClickListener(listener);
+                if(mUseDefaultListener)
+                    nextView.setOnClickListener(listener);
                 animator.setOldView(currentView);
                 animator.setNewView(nextView);
 
@@ -128,7 +146,8 @@ public class Controller {
                 if (mLoop) {
                     iterator = mViews.listIterator();
                     View nextView = mViews.get(0);
-                    nextView.setOnClickListener(listener);
+                    if(mUseDefaultListener)
+                        nextView.setOnClickListener(listener);
 
                     animator.setOldView(currentView);
                     animator.setNewView(nextView);
@@ -151,7 +170,8 @@ public class Controller {
             if(iterator.nextIndex() > 0) {
                 View previousView = iterator.previous();
 
-                previousView.setOnClickListener(listener);
+                if(mUseDefaultListener)
+                    previousView.setOnClickListener(listener);
 
                 ControllerAnimator animator = getDefaultBackwardAnimation();
 
@@ -173,7 +193,8 @@ public class Controller {
 
                 View currentView = mViews.get(0);
                 View previousView = mViews.get(mViews.size()-1);
-                previousView.setOnClickListener(listener);
+                if(mUseDefaultListener)
+                    previousView.setOnClickListener(listener);
 
                 ControllerAnimator animator = getDefaultBackwardAnimation();
 
@@ -201,7 +222,8 @@ public class Controller {
             if(iterator.nextIndex() > 0) {
                 View previousView = iterator.previous();
 
-                previousView.setOnClickListener(listener);
+                if(mUseDefaultListener)
+                    previousView.setOnClickListener(listener);
 
                 animator.setOldView(currentView);
                 animator.setNewView(previousView);
@@ -221,7 +243,9 @@ public class Controller {
 
                 View currentView = mViews.get(0);
                 View previousView = mViews.get(mViews.size()-1);
-                previousView.setOnClickListener(listener);
+
+                if(mUseDefaultListener)
+                    previousView.setOnClickListener(listener);
 
                 animator.setOldView(currentView);
                 animator.setNewView(previousView);
@@ -353,6 +377,14 @@ public class Controller {
     public boolean hasPrevious()
     {
         return iterator.hasPrevious();
+    }
+
+    public boolean ismUseDefaultListener() {
+        return mUseDefaultListener;
+    }
+
+    public void setmUseDefaultListener(boolean mUseDefaultListener) {
+        this.mUseDefaultListener = mUseDefaultListener;
     }
 
     /**

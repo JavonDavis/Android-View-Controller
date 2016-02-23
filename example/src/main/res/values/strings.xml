@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">FlipSample</string>
+    <string name="textview_sample">TextView Sample</string>
+    <string name="imageview_sample">ImageView Sample</string>
+    <string name="viewgroup_sample">ViewGroup Sample</string>
+    <string name="custom_animator_sample">Custom animator sample</string>
+    <string name="view_controller_samples">View Controller Samples</string>
+    <string name="javon">Javon</string>
+    <string name="is">is</string>
+    <string name="name">name</string>
+    <string name="my">my</string>
+    <string name="hi">Hi</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
 </resources>

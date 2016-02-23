@@ -1,5 +1,7 @@
-package com.javon.flipcontroller;
+package com.javon.flipcontroller.animators;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
@@ -38,18 +40,17 @@ public class RightFlipAnimator extends ControllerAnimator {
         //clearing the listener is important as it would cause an infinite
         // loop in onAnimationEnd due to the ViewPropertyAnimator in the map created
         oldView.animate().setListener(null).rotationYBy(90).setInterpolator
-                (new AccelerateInterpolator()).setDuration(getDuration());
-
-        mHandler.postDelayed(new Runnable() {
-            public void run() {
+                (new AccelerateInterpolator()).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
                 newView.setVisibility(View.VISIBLE);
-                oldView.setVisibility(View.INVISIBLE);
+                oldView.setVisibility(View.GONE);
 
                 //remember to clear the listener
                 newView.animate().setListener(null).rotationYBy(90).setDuration(getDuration());
-                oldView.setRotationY(90);
+                oldView.setRotationY(0);
             }
-        }, getDuration()-getDuration()/30); //subtract a small portion to smooth out the transition
+        }).setDuration(getDuration());
     }
 
     @Override

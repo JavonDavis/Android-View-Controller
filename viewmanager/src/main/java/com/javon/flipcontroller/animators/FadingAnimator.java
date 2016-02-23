@@ -1,4 +1,4 @@
-package com.javon.flipcontroller;
+package com.javon.flipcontroller.animators;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,7 +31,7 @@ public class FadingAnimator extends ControllerAnimator {
     @Override
     public void onAnimationStart(Animation animation) {
         final View oldView = getOldView();
-        View newView = getNewView();
+        final View newView = getNewView();
         
         // Set the new view to 0% opacity but visible, so that it is visible
         // (but fully transparent) during the animation.
@@ -44,7 +44,6 @@ public class FadingAnimator extends ControllerAnimator {
                 .alpha(1f)
                 .setDuration(getDuration())
                 .setListener(null);
-
         // Animate the old view to 0% opacity. After the animation ends,
         // set its visibility to GONE as an optimization step (it won't
         // participate in layout passes, etc.)
@@ -55,6 +54,7 @@ public class FadingAnimator extends ControllerAnimator {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         oldView.setVisibility(View.GONE);
+                        oldView.setAlpha(1f);
                     }
                 });
     }
