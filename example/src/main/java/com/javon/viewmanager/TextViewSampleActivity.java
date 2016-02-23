@@ -10,6 +10,9 @@ import com.javon.flipcontroller.controllers.Controller;
 
 import java.util.ArrayList;
 
+/**
+ * @author Javon Davis
+ */
 public class TextViewSampleActivity extends AppCompatActivity {
 
     @Override

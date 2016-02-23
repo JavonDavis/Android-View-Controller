@@ -12,4 +12,11 @@
     <string name="hi">Hi</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="fruits">Fruits</string>
+    <string name="next_fruit">Next Fruit</string>
+    <string name="apples_are_a_really_red_type_of_fruit">Apples are a really red type of Fruit</string>
+    <string name="bananas_are_a_really_yellow_type_of_fruit">Bananas are a really yellow type of fruit!</string>
+    <string name="grapes_are_a_really_purple_type_of_fruit">Grapes are a really purple type of fruit.</string>
+    <string name="oranges_are_a_really_orange_type_of_fruit_lol">Oranges are a really orange type of fruit lol</string>
+    <string name="shaking_fruits">Shaking Fruits</string>
 </resources>

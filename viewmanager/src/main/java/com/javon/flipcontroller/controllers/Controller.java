@@ -7,6 +7,7 @@ import com.javon.flipcontroller.animators.FadingAnimator;
 import com.javon.flipcontroller.animators.LeftFlipAnimator;
 import com.javon.flipcontroller.animators.RightFlipAnimator;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -24,6 +25,9 @@ public class Controller {
     private boolean mLoop;
     private ViewListener listener;
     private boolean mUseDefaultListener;
+
+    private ControllerListener mListener; // Considered using a WeakReference to it but nah, if I
+                                         // decided to accommodate more than one Listeners a WeakHashmap might be appropriate
 
     /**
      *
@@ -66,7 +70,7 @@ public class Controller {
         this.mLoop = loop;
 
         if(defaultForwardAnimation == null)
-            this.mDefaultForwardAnimation = new FadingAnimator();
+            this.mDefaultForwardAnimation = new RightFlipAnimator();
         else
             this.mDefaultForwardAnimation = defaultForwardAnimation;
 
@@ -83,13 +87,13 @@ public class Controller {
     {
         if(iterator.hasNext()) {
             View currentView = iterator.next();
-            if(mUseDefaultListener)
+            if(isUsingDefaultListener())
                 currentView.setOnClickListener(null);
 
             if (iterator.nextIndex() < mViews.size()) {
                 View nextView = mViews.get(iterator.nextIndex());
 
-                if(mUseDefaultListener)
+                if(isUsingDefaultListener())
                     nextView.setOnClickListener(listener);
 
                 ControllerAnimator animator = getDefaultForwardAnimation();
@@ -98,6 +102,10 @@ public class Controller {
                 animator.setNewView(nextView);
 
                 currentView.startAnimation(animator);
+
+                if(iterator.nextIndex() == mViews.size() - 1)
+                    if(hasControllerListener())
+                        mListener.onEndReached();
 
             }
             else
@@ -130,18 +138,21 @@ public class Controller {
 
         if(iterator.hasNext()) {
             View currentView = iterator.next();
-            if(mUseDefaultListener)
+            if(isUsingDefaultListener())
                 currentView.setOnClickListener(null);
 
             if (iterator.nextIndex() < mViews.size()) {
                 View nextView = mViews.get(iterator.nextIndex());
-                if(mUseDefaultListener)
+                if(isUsingDefaultListener())
                     nextView.setOnClickListener(listener);
                 animator.setOldView(currentView);
                 animator.setNewView(nextView);
 
                 currentView.startAnimation(animator);
 
+                if(iterator.nextIndex() == mViews.size() - 1)
+                    if(hasControllerListener())
+                        mListener.onEndReached();
             } else {
                 if (mLoop) {
                     iterator = mViews.listIterator();
@@ -170,7 +181,7 @@ public class Controller {
             if(iterator.nextIndex() > 0) {
                 View previousView = iterator.previous();
 
-                if(mUseDefaultListener)
+                if(isUsingDefaultListener())
                     previousView.setOnClickListener(listener);
 
                 ControllerAnimator animator = getDefaultBackwardAnimation();
@@ -222,7 +233,7 @@ public class Controller {
             if(iterator.nextIndex() > 0) {
                 View previousView = iterator.previous();
 
-                if(mUseDefaultListener)
+                if(isUsingDefaultListener())
                     previousView.setOnClickListener(listener);
 
                 animator.setOldView(currentView);
@@ -379,12 +390,22 @@ public class Controller {
         return iterator.hasPrevious();
     }
 
-    public boolean ismUseDefaultListener() {
+    public boolean isUsingDefaultListener() {
         return mUseDefaultListener;
     }
 
-    public void setmUseDefaultListener(boolean mUseDefaultListener) {
+    public void useDefaultListener(boolean mUseDefaultListener) {
         this.mUseDefaultListener = mUseDefaultListener;
+    }
+
+    public boolean hasControllerListener()
+    {
+        return mListener != null;
+    }
+
+    public void setControllerListener(ControllerListener listener)
+    {
+        this.mListener = listener;
     }
 
     /**
@@ -395,5 +416,10 @@ public class Controller {
         public void onClick(View v) {
             next();
         }
+    }
+
+    public interface ControllerListener
+    {
+        void onEndReached();
     }
 }
