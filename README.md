@@ -12,7 +12,7 @@ This library can be installed one of 3 ways.
 Simply add the following line to the dependencies in your module level build.gradle
 
 ```groovy
-compile 'com.javon.viewmanager:viewmanager:1.0.1'
+compile 'com.javon.viewmanager:viewmanager:1.0.2'
 ```
 ###Specifying it as a dependency through maven
 ```xml
