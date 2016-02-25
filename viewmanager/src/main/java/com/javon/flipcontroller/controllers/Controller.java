@@ -41,7 +41,8 @@ public class Controller {
     /**
      *
      * @param views - list of views to be used in the correct order
-     * @param useDefaultListeners - if true, the default onClick listener will be used which is an onClick listener on the entire view
+     * @param useDefaultListeners - if true the default onClick listener will be used which is an onClick listener on the entire view
+     * @param loop - if true when the next view after the last view in the list will be the first view
      */
     public Controller(ArrayList<View> views, boolean useDefaultListeners,boolean loop)
     {
