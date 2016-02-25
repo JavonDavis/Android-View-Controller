@@ -356,6 +356,17 @@ public class Controller {
         this.mViews = views;
     }
 
+    public void addToViews(View view)
+    {
+        if(view == null)
+            throw new NullPointerException("Cannot add null view to list");
+
+        if(mViews == null)
+            throw new NullPointerException("No List for views has been set");
+
+        this.mViews.add(view);
+    }
+
     /**
      *
      * @return - the iterator being used on the views
