@@ -1,4 +1,4 @@
-# Android View Controller
+# Android View Controller [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20View%20Controller-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3208)
 
 An Android library for cycling through views using animations. The library provides 2 animations as built in animations: a flip animation and a fade animation.
 
