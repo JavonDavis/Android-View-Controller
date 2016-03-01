@@ -27,7 +27,7 @@ compile 'com.javon.viewmanager:viewmanager:1.0.3'
 <dependency>
   <groupId>com.javon.viewmanager</groupId>
   <artifactId>viewmanager</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.3</version>
   <type>pom</type>
 </dependency>
 ```
