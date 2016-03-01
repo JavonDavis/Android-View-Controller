@@ -1,13 +1,12 @@
-package com.javon.flipcontroller.controllers;
+package com.javon.viewmanager.controllers;
 
+import android.content.Context;
 import android.view.View;
 
-import com.javon.flipcontroller.animators.ControllerAnimator;
-import com.javon.flipcontroller.animators.FadingAnimator;
-import com.javon.flipcontroller.animators.LeftFlipAnimator;
-import com.javon.flipcontroller.animators.RightFlipAnimator;
+import com.javon.viewmanager.animators.ControllerAnimator;
+import com.javon.viewmanager.animators.LeftFlipAnimator;
+import com.javon.viewmanager.animators.RightFlipAnimator;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -30,34 +29,48 @@ public class Controller {
                                          // decided to accommodate more than one Listeners a WeakHashmap might be appropriate
 
     /**
-     *
+     * This constructor will use the default listener and also not loop around
+     * @param context - application Context
      * @param views - list of views to be used in the correct order
      */
-    public Controller(ArrayList<View> views)
+    public Controller(Context context, ArrayList<View> views)
     {
-        this(views,true,false);
+        this(context,views,true,false);
     }
 
     /**
-     *
+     * @param context - application Context
      * @param views - list of views to be used in the correct order
      * @param useDefaultListeners - if true the default onClick listener will be used which is an onClick listener on the entire view
      * @param loop - if true when the next view after the last view in the list will be the first view
      */
-    public Controller(ArrayList<View> views, boolean useDefaultListeners,boolean loop)
+    public Controller(Context context, ArrayList<View> views, boolean useDefaultListeners,boolean loop)
     {
-        this(views,useDefaultListeners,loop,null,null);
+        this(context,views,useDefaultListeners,loop,null,null);
+    }
+
+    /**
+     * This constructor will use the default listener and also not loop around
+     * @param context - application Context
+     * @param views - list of views to be used in the correct order
+     * @param defaultForwardAnimation - animation to be used whenever going to the next view in the list, if null the default is used
+     * @param defaultBackwardAnimation - animation to be used whenever going back to the previous view in the list, if null the default is used
+     */
+    public Controller(Context context, ArrayList<View> views, ControllerAnimator defaultForwardAnimation, ControllerAnimator defaultBackwardAnimation)
+    {
+        this(context,views,true,false,defaultForwardAnimation,defaultBackwardAnimation);
     }
 
     /**
      *
+     * @param context - application Context
      * @param views - list of views to be used in the correct order
-     * @param useDefaultListeners - if true, the default onlick listener will be used which is an onClick listener on the entire view
+     * @param useDefaultListeners - if true, the default onClick listener will be used which is an onClick listener on the entire view
      * @param loop - if true it will loop around the list of views and start from the beginning
      * @param defaultForwardAnimation - animation to be used whenever going to the next view in the list, if null the default is used
      * @param defaultBackwardAnimation - animation to be used whenever going back to the previous view in the list, if null the default is used
      */
-    public Controller(ArrayList<View> views, boolean useDefaultListeners, boolean loop, ControllerAnimator defaultForwardAnimation, ControllerAnimator defaultBackwardAnimation) {
+    public Controller(Context context, ArrayList<View> views, boolean useDefaultListeners, boolean loop, ControllerAnimator defaultForwardAnimation, ControllerAnimator defaultBackwardAnimation) {
         this.mViews = views;
         this.iterator = views.listIterator();
 
@@ -70,13 +83,16 @@ public class Controller {
 
         this.mLoop = loop;
 
+        if((defaultForwardAnimation == null || defaultBackwardAnimation == null) && context == null)
+            throw new NullPointerException("null Context value cannot be used with default animator");
+
         if(defaultForwardAnimation == null)
-            this.mDefaultForwardAnimation = new RightFlipAnimator();
+            this.mDefaultForwardAnimation = new RightFlipAnimator(context);
         else
             this.mDefaultForwardAnimation = defaultForwardAnimation;
 
         if(defaultBackwardAnimation == null)
-            this.mDefaultBackwardAnimation = new LeftFlipAnimator();
+            this.mDefaultBackwardAnimation = new LeftFlipAnimator(context);
         else
             this.mDefaultBackwardAnimation = defaultBackwardAnimation;
     }
@@ -278,9 +294,12 @@ public class Controller {
      *
      * @param defaultForwardAnimation the default animation for next
      */
-    public void setDefaultForwardAnimation(ControllerAnimator defaultForwardAnimation) {
+    public void setDefaultForwardAnimation(Context context, ControllerAnimator defaultForwardAnimation) {
+        if(defaultForwardAnimation == null && context == null)
+            throw new NullPointerException("null Context value cannot be used with default animator");
+
         if(defaultForwardAnimation == null)
-            this.mDefaultForwardAnimation = new RightFlipAnimator();
+            this.mDefaultForwardAnimation = new RightFlipAnimator(context);
         else
             this.mDefaultForwardAnimation = defaultForwardAnimation;
     }
@@ -334,9 +353,12 @@ public class Controller {
      *
      * @param defaultBackwardAnimation the default animation for previous
      */
-    public void setDefaultBackwardAnimation(ControllerAnimator defaultBackwardAnimation) {
+    public void setDefaultBackwardAnimation(Context context,ControllerAnimator defaultBackwardAnimation) {
+        if( defaultBackwardAnimation == null && context == null)
+            throw new NullPointerException("null Context value cannot be used with default animator");
+
         if(defaultBackwardAnimation == null)
-            this.mDefaultBackwardAnimation = new LeftFlipAnimator();
+            this.mDefaultBackwardAnimation = new LeftFlipAnimator(context);
         else
             this.mDefaultBackwardAnimation = defaultBackwardAnimation;
     }

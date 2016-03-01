@@ -1,4 +1,4 @@
-package com.javon.flipcontroller;
+package com.javon.viewmanager;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.javon.viewmanager">
+    package="com.javon.viewmanager.examples">
 
     <application
         android:allowBackup="true"
@@ -19,7 +19,7 @@
         <activity android:name=".samples.ImageViewSampleActivity" />
         <activity android:name=".samples.ViewGroupSampleActivity" />
         <activity android:name=".samples.CustomAnimatorSampleActivity" />
-        <activity android:name=".samples.RecyclerViewSampleActivity"></activity>
+        <activity android:name=".samples.RecyclerViewSampleActivity"/>
     </application>
 
 </manifest>

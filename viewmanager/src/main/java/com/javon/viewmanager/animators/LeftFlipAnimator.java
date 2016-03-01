@@ -1,7 +1,8 @@
-package com.javon.flipcontroller.animators;
+package com.javon.viewmanager.animators;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -18,16 +19,16 @@ public class LeftFlipAnimator extends ControllerAnimator {
      * @param oldView - the view to transition from
      * @param newView - the view to transition to
      */
-    public LeftFlipAnimator(View oldView, View newView)
+    public LeftFlipAnimator(Context context,View oldView, View newView)
     {
-        super(oldView,newView);
+        super(context,oldView,newView);
     }
 
     /**
      * Default Constructor
      */
-    public LeftFlipAnimator() {
-        super();
+    public LeftFlipAnimator(Context context) {
+        super(context);
     }
 
 

@@ -1,12 +1,12 @@
-package com.javon.viewmanager.samples;
+package com.javon.viewmanager.examples.samples;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.javon.viewmanager.R;
-import com.javon.viewmanager.samples.adapters.CustomAdapter;
+import com.javon.viewmanager.examples.R;
+import com.javon.viewmanager.examples.samples.adapters.CustomAdapter;
 
 import java.util.ArrayList;
 

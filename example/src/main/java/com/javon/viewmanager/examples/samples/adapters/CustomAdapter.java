@@ -1,4 +1,4 @@
-package com.javon.viewmanager.samples.adapters;
+package com.javon.viewmanager.examples.samples.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.javon.flipcontroller.controllers.Controller;
-import com.javon.viewmanager.R;
+import com.javon.viewmanager.controllers.Controller;
+import com.javon.viewmanager.examples.R;
 
 import java.util.ArrayList;
 
@@ -62,7 +62,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomHold
             views.add(large);
             views.add(small);
 
-            controller = new Controller(views,true,true);
+            controller = new Controller(context,views,true,true);
 
         }
 

@@ -1,12 +1,12 @@
-package com.javon.viewmanager.samples;
+package com.javon.viewmanager.examples.samples;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.javon.flipcontroller.controllers.Controller;
-import com.javon.viewmanager.R;
+import com.javon.viewmanager.controllers.Controller;
+import com.javon.viewmanager.examples.R;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ public class ViewGroupSampleActivity extends AppCompatActivity {
         views.add(grapesLayout);
         views.add(orangeLayout);
 
-        controller = new Controller(views,false,true);
+        controller = new Controller(this,views,false,true);
     }
 
     public void nextFruit(View view) {

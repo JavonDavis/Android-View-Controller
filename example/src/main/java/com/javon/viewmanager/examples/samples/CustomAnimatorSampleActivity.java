@@ -1,5 +1,6 @@
-package com.javon.viewmanager.samples;
+package com.javon.viewmanager.examples.samples;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -8,9 +9,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.javon.flipcontroller.animators.ControllerAnimator;
-import com.javon.flipcontroller.controllers.Controller;
-import com.javon.viewmanager.R;
+import com.javon.viewmanager.animators.ControllerAnimator;
+import com.javon.viewmanager.controllers.Controller;
+import com.javon.viewmanager.examples.R;
 
 import java.util.ArrayList;
 
@@ -35,17 +36,25 @@ public class CustomAnimatorSampleActivity extends AppCompatActivity {
         views.add(grapesView);
         views.add(orangesView);
 
-        Controller controller = new Controller(views,true,true, new ShakeAnimator(),new ShakeAnimator());
+        Controller controller = new Controller(this,views,true,true, new ShakeAnimator(this),new ShakeAnimator(this));
         controller.setControllerListener(new Controller.ControllerListener() {
             @Override
             public void onEndReached() {
-                Toast.makeText(CustomAnimatorSampleActivity.this,"No more fruits :( But keep going to see the rest! :)",Toast.LENGTH_LONG).show();
+                Toast.makeText(CustomAnimatorSampleActivity.this,"No more fruits :( But keep going to see them again! :)",Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private class ShakeAnimator extends ControllerAnimator
     {
+
+        public ShakeAnimator(Context context) {
+            super(context);
+        }
+
+        public ShakeAnimator(Context context, View oldView, View newView) {
+            super(context, oldView, newView);
+        }
 
         @Override
         public void onAnimationStart(Animation animation) {

@@ -1,4 +1,4 @@
-package com.javon.viewmanager.samples;
+package com.javon.viewmanager.examples.samples;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.javon.flipcontroller.controllers.Controller;
-import com.javon.viewmanager.R;
+import com.javon.viewmanager.controllers.Controller;
+import com.javon.viewmanager.examples.R;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class TextViewSampleActivity extends AppCompatActivity {
         views.add(is);
         views.add(_Javon);
 
-        final Controller controller = new Controller(views,false,true);
+        final Controller controller = new Controller(this,views,false,true);
 
         Button nextButton = (Button) findViewById(R.id.next_button);
         Button previousButton = (Button) findViewById(R.id.previous_button);

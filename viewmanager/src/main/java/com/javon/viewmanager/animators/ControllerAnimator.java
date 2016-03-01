@@ -1,5 +1,6 @@
-package com.javon.flipcontroller.animators;
+package com.javon.viewmanager.animators;
 
+import android.content.Context;
 import android.view.View;
 import android.view.animation.Animation;
 
@@ -12,18 +13,24 @@ public abstract class ControllerAnimator extends Animation implements Animation.
     private View mOldView;
     private View mNewView;
 
+    private Context mContext;
+
     private static final int DEFAULT_DURATION = 1000;
 
     /**
      * Default Constructor
      */
-    public ControllerAnimator()
+    public ControllerAnimator(Context context)
     {
+        if(context != null)
+            setContext(context);
+        else
+            throw new NullPointerException("Context cannot be null");
         setDuration(DEFAULT_DURATION);
         setAnimationListener(this);
     }
 
-    public ControllerAnimator(View oldView, View newView)
+    public ControllerAnimator(Context context, View oldView, View newView)
     {
         this.mOldView = oldView;
         this.mNewView = newView;
@@ -32,6 +39,12 @@ public abstract class ControllerAnimator extends Animation implements Animation.
             this.mNewView.setLayoutParams(this.mOldView.getLayoutParams());
         else
             throw new NullPointerException("View parameters cannot be null");
+
+        if(context != null)
+            setContext(context);
+        else
+            throw new NullPointerException("Context cannot be null");
+
         setDuration(DEFAULT_DURATION);
         setAnimationListener(this);
     }
@@ -54,5 +67,13 @@ public abstract class ControllerAnimator extends Animation implements Animation.
         this.mNewView = newView;
         if(mOldView != null)
             this.mNewView.setLayoutParams(mOldView.getLayoutParams());
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
+
+    public void setContext(Context context) {
+        this.mContext = context;
     }
 }

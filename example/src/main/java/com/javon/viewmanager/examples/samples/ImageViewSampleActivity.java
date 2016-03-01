@@ -1,4 +1,4 @@
-package com.javon.viewmanager.samples;
+package com.javon.viewmanager.examples.samples;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.javon.flipcontroller.animators.FadingAnimator;
-import com.javon.flipcontroller.controllers.Controller;
-import com.javon.viewmanager.R;
+import com.javon.viewmanager.animators.FadingAnimator;
+import com.javon.viewmanager.animators.ShakeAnimator;
+import com.javon.viewmanager.controllers.Controller;
+import com.javon.viewmanager.examples.R;
 
 import java.util.ArrayList;
 
@@ -33,7 +34,7 @@ public class ImageViewSampleActivity extends AppCompatActivity {
         views.add(grapesView);
         views.add(orangesView);
 
-        Controller controller = new Controller(views,true,false, new FadingAnimator(),new FadingAnimator());
+        Controller controller = new Controller(this,views,true,false, new ShakeAnimator(this),new FadingAnimator(this));
         controller.setControllerListener(new Controller.ControllerListener() {
             @Override
             public void onEndReached() {

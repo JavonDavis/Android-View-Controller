@@ -1,4 +1,4 @@
-package com.javon.flipcontroller;
+package com.javon.viewmanager;
 
 import org.junit.Test;
 
