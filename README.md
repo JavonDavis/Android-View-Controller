@@ -8,6 +8,8 @@ An Android library for cycling through views using animations. The library also 
 
 3. A fading animation.
 
+4. A shake animation
+
 Examples of how to use the library have been provided in the example module, you can build and run the app to see it in action.
 
 ##Installing
