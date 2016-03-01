@@ -104,7 +104,7 @@ Note in the xml above only one of the ImageViews is visible. Only the view you w
 After inflating the views an ArrayList will need to be constructed which contains the views in the order they should be shown, this will be the ArrayList that will be passed into the Controller class. ***It is important that the Views are in the ArrayList in the order you would like them to appear!***
 
 ###That's it
-After that just pass them into the Constructor of the Controller class and that's it! See below for an example how you would do this using the views from the xml above. 
+After that just pass them into the Constructor of the Controller class along with a Context and that's it! See below for an example how you would do this using the views from the xml above. 
 
 ```Java
 ImageView appleView = (ImageView) findViewById(R.id.apples_imageview);
@@ -118,7 +118,7 @@ views.add(bananaView);
 views.add(grapesView);
 views.add(orangesView);
 
-Controller controller = new Controller(views);
+Controller controller = new Controller(this,views);
 ```
 
 ***Note this will use the default animation of flipping.***
@@ -128,7 +128,7 @@ Controller controller = new Controller(views);
 Three animations have been provided in the library RightFlipAnimator LeftFlipAnimator and Fade Animator and a shake animator was also made in the example but is not included in the library as yet. The default is set to be RightFlipAnimator for forward and LeftFlipAnimator backward. If you would like to change it to the fading animation you can use the setter method provided or the constructor which accepts animators as parameters. See example below
 
 ```Java
-Controller controller = new Controller(views,true,false, new FadingAnimator(),new FadingAnimator());
+Controller controller = new Controller(this,views,true,false, new FadingAnimator(),new FadingAnimator());
 ```
 
 The two boolean parameters before the animators specify whether the controller should use the default listener or not, and whether it should loop around when the ArrayList has been exhausted or not.
