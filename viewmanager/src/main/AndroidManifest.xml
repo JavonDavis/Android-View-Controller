@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.javon.flipcontroller">
+    package="com.javon.viewmanager">
 
     <application
         android:allowBackup="true"
