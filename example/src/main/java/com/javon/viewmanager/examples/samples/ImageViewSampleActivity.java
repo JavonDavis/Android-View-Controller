@@ -6,8 +6,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.javon.viewmanager.animators.BottomFlipAnimator;
 import com.javon.viewmanager.animators.FadingAnimator;
-import com.javon.viewmanager.animators.ShakeAnimator;
 import com.javon.viewmanager.controllers.Controller;
 import com.javon.viewmanager.examples.R;
 
@@ -34,7 +34,7 @@ public class ImageViewSampleActivity extends AppCompatActivity {
         views.add(grapesView);
         views.add(orangesView);
 
-        Controller controller = new Controller(this,views,true,false, new ShakeAnimator(this),new FadingAnimator(this));
+        Controller controller = new Controller(this,views,true,false, new BottomFlipAnimator(this),new FadingAnimator(this));
         controller.setControllerListener(new Controller.ControllerListener() {
             @Override
             public void onEndReached() {

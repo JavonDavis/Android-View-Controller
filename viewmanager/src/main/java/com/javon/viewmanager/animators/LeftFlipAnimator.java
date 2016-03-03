@@ -53,7 +53,6 @@ public class LeftFlipAnimator extends ControllerAnimator {
 
                 //remember to clear the listener
                 newView.animate().setListener(null).rotationYBy(-90).setDuration(getDuration());
-                oldView.setRotationY(0);
             }
         }).setDuration(getDuration());
     }

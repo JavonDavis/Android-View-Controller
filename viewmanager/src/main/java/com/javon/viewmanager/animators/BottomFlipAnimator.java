@@ -1,25 +1,26 @@
-package com.javon.flipcontroller.animators;
+package com.javon.viewmanager.animators;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.os.Handler;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 
 /**
- * Class to change one view to the next through a flip animation at the top
+ * Class to change one view to the next through a flip animation at the bottom
+ *
  * @author Howard Edwards
  */
-public class TopFlipAnimator extends ControllerAnimator {
+public class BottomFlipAnimator extends ControllerAnimator {
 
-    public TopFlipAnimator() {
-        super();
+    public BottomFlipAnimator(Context context) {
+        super(context);
     }
 
-    public TopFlipAnimator(View oldView, View newView)
-    {
-        super(oldView,newView);
+    public BottomFlipAnimator(Context context, View oldView, View newView) {
+        super(context, oldView, newView);
     }
 
     @Override
@@ -27,13 +28,13 @@ public class TopFlipAnimator extends ControllerAnimator {
         final View oldView = getOldView();
         final View newView = getNewView();
 
-        newView.setRotationX(90);
+        newView.setRotationX(-90);
 
         Handler mHandler = new Handler();
 
         //clearing the listener is important as it would cause an infinite
         // loop in onAnimationEnd due to the ViewPropertyAnimator in the map created
-        oldView.animate().setListener(null).rotationXBy(-90).setInterpolator
+        oldView.animate().setListener(null).rotationXBy(90).setInterpolator
                 (new AccelerateInterpolator()).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -41,8 +42,7 @@ public class TopFlipAnimator extends ControllerAnimator {
                 oldView.setVisibility(View.GONE);
 
                 //remember to clear the listener
-                newView.animate().setListener(null).rotationXBy(-90).setDuration(getDuration());
-                oldView.setRotationX(0);
+                newView.animate().setListener(null).rotationXBy(90).setDuration(getDuration());
             }
         }).setDuration(getDuration());
     }
