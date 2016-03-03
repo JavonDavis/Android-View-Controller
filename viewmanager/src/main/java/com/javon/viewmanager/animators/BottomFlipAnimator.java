@@ -9,38 +9,32 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 
 /**
- * Class to change one view to the next through a flip animation to the right
- * @author Javon Davis
- *         Created by Javon Davis on 21/02/16.
+ * Class to change one view to the next through a flip animation at the bottom
+ *
+ * @author Howard Edwards
  */
-public class RightFlipAnimator extends ControllerAnimator {
+public class BottomFlipAnimator extends ControllerAnimator {
 
-    /**
-     * Default Constuctor
-     */
-    public RightFlipAnimator(Context context)
-    {
+    public BottomFlipAnimator(Context context) {
         super(context);
     }
 
-    public RightFlipAnimator(Context context,View oldView, View newView)
-    {
-        super(context,oldView,newView);
+    public BottomFlipAnimator(Context context, View oldView, View newView) {
+        super(context, oldView, newView);
     }
-
 
     @Override
     public void onAnimationStart(Animation animation) {
         final View oldView = getOldView();
         final View newView = getNewView();
 
-        newView.setRotationY(-90);
+        newView.setRotationX(-90);
 
         Handler mHandler = new Handler();
 
         //clearing the listener is important as it would cause an infinite
         // loop in onAnimationEnd due to the ViewPropertyAnimator in the map created
-        oldView.animate().setListener(null).rotationYBy(90).setInterpolator
+        oldView.animate().setListener(null).rotationXBy(90).setInterpolator
                 (new AccelerateInterpolator()).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -48,13 +42,14 @@ public class RightFlipAnimator extends ControllerAnimator {
                 oldView.setVisibility(View.GONE);
 
                 //remember to clear the listener
-                newView.animate().setListener(null).rotationYBy(90).setDuration(getDuration());
+                newView.animate().setListener(null).rotationXBy(90).setDuration(getDuration());
             }
         }).setDuration(getDuration());
     }
 
     @Override
     public void onAnimationEnd(Animation animation) {
+
     }
 
     @Override

@@ -19,7 +19,7 @@
         <activity android:name=".samples.ImageViewSampleActivity" />
         <activity android:name=".samples.ViewGroupSampleActivity" />
         <activity android:name=".samples.CustomAnimatorSampleActivity" />
-        <activity android:name=".samples.RecyclerViewSampleActivity"/>
+        <activity android:name=".samples.RecyclerViewSampleActivity" />
     </application>
 
 </manifest>
