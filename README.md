@@ -10,6 +10,14 @@ An Android library for cycling through views using animations. The library also 
 
 4. A shake animation
 
+5. A Slide left animation
+
+6. A Slide right animation
+
+7. A top flip animation.
+
+8. A bottom flip animation
+
 Examples of how to use the library have been provided in the example module, you can build and run the app to see it in action.
 
 ##Installing
