@@ -1,5 +1,7 @@
 # Android View Controller [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20View%20Controller-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3208)
 
+[![Join the chat at https://gitter.im/JA-VON/Android-View-Controller](https://badges.gitter.im/JA-VON/Android-View-Controller.svg)](https://gitter.im/JA-VON/Android-View-Controller?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 An Android library for cycling through views using animations. The library also provides animations as built in animations that can be used:
 
 1. A right flip animation
