@@ -25,7 +25,7 @@ Examples of how to use the library have been provided in the example module, you
 ##Installing
 This library can be installed one of 3 ways.
 
-###As a gradle dependency
+###As a dependency on gradle
 
 Simply add the following line to the dependencies in your module level build.gradle
 
