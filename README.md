@@ -8,7 +8,7 @@ An Android library for cycling through views using animations. The library also 
 
 2. A left flip animation
 
-3. A fading animation.
+3. A fading animation
 
 4. A shake animation
 
@@ -16,7 +16,7 @@ An Android library for cycling through views using animations. The library also 
 
 6. A Slide right animation
 
-7. A top flip animation.
+7. A top flip animation
 
 8. A bottom flip animation
 
