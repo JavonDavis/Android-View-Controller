@@ -24,7 +24,7 @@ Examples of how to use the library have been provided in the example module, you
 
 ![Demo with a Viewgroup](https://github.com/JA-VON/Android-View-Controller/blob/master/demo1.gif)
 
-![Demo with a recyclerview](https://github.com/JA-VON/Android-View-Controller/blob/master/demo1.gif)
+![Demo with a recyclerview](https://github.com/JA-VON/Android-View-Controller/blob/master/demo2.gif)
 
 ##Installing
 This library can be installed one of 3 ways.
