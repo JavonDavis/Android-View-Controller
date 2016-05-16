@@ -22,6 +22,10 @@ An Android library for cycling through views using animations. The library also 
 
 Examples of how to use the library have been provided in the example module, you can build and run the app to see it in action.
 
+![Demo with a Viewgroup](https://github.com/JA-VON/Android-View-Controller/blob/master/demo1.gif)
+
+![Demo with a recyclerview](https://github.com/JA-VON/Android-View-Controller/blob/master/demo1.gif)
+
 ##Installing
 This library can be installed one of 3 ways.
 
