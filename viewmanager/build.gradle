@@ -39,7 +39,7 @@ ext {
     siteUrl = 'https://github.com/JA-VON/Android-View-Controller'
     gitUrl = 'https://github.com/JA-VON/Android-View-Controller'
 
-    libraryVersion = '1.0.2'
+    libraryVersion = '1.0.3'
 
     developerId = 'javondavis'
     developerName = 'Javon Davis'
@@ -48,6 +48,6 @@ ext {
     licenseName = 'The Apache License'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0'
     allLicenses = ["Apache-2.0"]
-//    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
-//    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+    apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
 }
