@@ -1,21 +1,31 @@
 # Android View Controller [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android%20View%20Controller-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3208)
 
+[![Join the chat at https://gitter.im/JA-VON/Android-View-Controller](https://badges.gitter.im/JA-VON/Android-View-Controller.svg)](https://gitter.im/JA-VON/Android-View-Controller?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 An Android library for cycling through views using animations. The library also provides animations as built in animations that can be used:
 
 1. A right flip animation
 
 2. A left flip animation
 
-3. A fading animation.
+3. A fading animation
 
 4. A shake animation
+
+5. A Slide left animation
+
+6. A Slide right animation
+
+7. A top flip animation
+
+8. A bottom flip animation
 
 Examples of how to use the library have been provided in the example module, you can build and run the app to see it in action.
 
 ##Installing
 This library can be installed one of 3 ways.
 
-###As a gradle dependency
+###As a dependency on gradle
 
 Simply add the following line to the dependencies in your module level build.gradle
 
