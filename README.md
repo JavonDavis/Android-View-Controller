@@ -2,7 +2,7 @@
 
 [![Join the chat at https://gitter.im/JA-VON/Android-View-Controller](https://badges.gitter.im/JA-VON/Android-View-Controller.svg)](https://gitter.im/JA-VON/Android-View-Controller?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-An Android library for cycling through views using animations. The library also provides animations as built in animations that can be used:
+An Android library for cycling through views using animations in a list. The library also provides animations as built in animations that can be used:
 
 1. A right flip animation
 
