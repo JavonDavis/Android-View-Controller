@@ -194,7 +194,8 @@ class ShakeAnimator extends ControllerAnimator
 
 The following animation can be demoed in the example module of the project.
 
-##Contributions
+## Contributions
+
 Please fork this repository and contribute back using [pull requests](https://github.com/JA-VON/Android-View-Controller/pulls). Features can be requested using [issues](https://github.com/JA-VON/Android-View-Controller/issues). All code, comments, and critiques are greatly appreciated.
 
 Encouraged contributions are more animators that can be included as default options in the library. Please see the ControllerAnimator classs as all animators will need to extend this. This main purpose of this class is to enforce the presence of both an oldView to transition from and a newView to transition to.
