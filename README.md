@@ -36,7 +36,7 @@ Simply add the following line to the dependencies in your module level build.gra
 ```groovy
 compile 'com.javon.viewmanager:viewmanager:1.0.3'
 ```
-###Specifying it as a dependency through maven
+### Specifying it as a dependency through maven
 ```xml
 <dependency>
   <groupId>com.javon.viewmanager</groupId>
